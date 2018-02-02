@@ -1,7 +1,6 @@
 'use strict';
 
 var setupWindow = document.querySelector('.setup');
-setupWindow.classList.remove('hidden');
 
 var NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var LAST_NAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
@@ -12,23 +11,33 @@ var wizards = [];
 var similarListElement = setupWindow.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template').content;
 
-var getRandomIndex = function (array) {
-  return Math.floor(Math.random() * array.length);
+var getRandomIndex = function () {
+  return Math.floor(Math.random() * NAMES.length);
 };
 
-var generatePerson = function (names, lastNames, coatColors, eyesColors) {
+var getRandomArr = function (array) {
+  var randomArr = array;
+  return randomArr.sort(getRandomIndex);
+};
+
+var createWizard = function (name, lastName, coatColor, eyesColor) {
   var wizard = {
-    name: names[getRandomIndex(names)],
-    lastName: lastNames[getRandomIndex(lastNames)],
-    coatColor: coatColors[getRandomIndex(coatColors)],
-    eyesColor: eyesColors[getRandomIndex(eyesColors)]
+    name: name,
+    lastName: lastName,
+    coatColor: coatColor,
+    eyesColor: eyesColor
   };
+
   return wizard;
 };
-// сделать проверку на неповторяющиеся имена
+
 var generateWizardsArray = function () {
+  var randomNames = getRandomArr(NAMES);
+  var randomLastNames = getRandomArr(LAST_NAMES);
+  var randomCoatColors = getRandomArr(COAT_COLORS);
+  var randomEyesColors = getRandomArr(EYES_COLORS);
   for (var i = 0; i <= WIZARDS_INDEX; i++) {
-    wizards[i] = generatePerson(NAMES, LAST_NAMES, COAT_COLORS, EYES_COLORS);
+    wizards[i] = createWizard(randomNames[i], randomLastNames[i], randomCoatColors[i], randomEyesColors[i]);
   }
 };
 
@@ -44,11 +53,15 @@ var renderWizard = function (wizard) {
   return wizardElement;
 };
 
-// реализовать функцию
-var fragment = document.createDocumentFragment();
-for (var j = 0; j < wizards.length; j++) {
-  fragment.appendChild(renderWizard(wizards[j]));
-}
+var displaySetupWindow = function () {
+  var fragment = document.createDocumentFragment();
+  for (var j = 0; j < wizards.length; j++) {
+    fragment.appendChild(renderWizard(wizards[j]));
+  }
 
-similarListElement.appendChild(fragment);
-setupWindow.querySelector('.setup-similar').classList.remove('hidden');
+  similarListElement.appendChild(fragment);
+  setupWindow.classList.remove('hidden');
+  setupWindow.querySelector('.setup-similar').classList.remove('hidden');
+};
+
+displaySetupWindow();

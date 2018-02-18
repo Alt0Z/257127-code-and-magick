@@ -62,7 +62,6 @@ renderSimilarWizards(); // Перенести в onSetupOpenClick, но реал
 
 // Обработка событий
 var openSetup = function () {
-  console.log('setup open');
   setupWindow.classList.remove('hidden');
   setupWindow.querySelector('.setup-similar').classList.remove('hidden');
   document.removeEventListener('keydown', onEnterPress);
@@ -76,7 +75,6 @@ var openSetup = function () {
 };
 
 var closeSetup = function () {
-  console.log('setup close');
   setupWindow.classList.add('hidden');
   setupOpen.addEventListener('keydown', onEnterPress);
   document.removeEventListener('keydown', onEscPress);

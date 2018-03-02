@@ -1,7 +1,6 @@
 'use strict';
 
 (function () {
-  console.log('valid connected');
   var userNameField = window.setupWindow.querySelector('.setup-user-name');
   var onInvalidName = function () {
     if (userNameField.validity.tooShort) {

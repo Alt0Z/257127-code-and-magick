@@ -6,22 +6,18 @@
   var wizardEyes = myWizard.querySelector('.wizard-eyes');
   var wizardFireball = document.querySelector('.setup-fireball-wrap');
 
-  var sortArray = function (array) {
-    return array.sort(window.getRandomIndex);
-  };
-
   var getRandomCoatColor = function () {
-    sortArray(window.coatColors);
+    window.randomizeArray(window.coatColors);
     wizardCoat.style.fill = window.coatColors[0];
   };
 
   var getRandomEyesColor = function () {
-    sortArray(window.eyesColors);
+    window.randomizeArray(window.eyesColors);
     wizardEyes.style.fill = window.eyesColors[0];
   };
 
   var getRandomFireballColor = function () {
-    sortArray(window.fireballColors);
+    window.randomizeArray(window.fireballColors);
     wizardFireball.style.backgroundColor = window.fireballColors[0];
   };
 
